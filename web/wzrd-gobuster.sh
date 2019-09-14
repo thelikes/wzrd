@@ -23,6 +23,9 @@ while [ "$1" != "" ]; do
         -x | --extensions )		shift
 								extensions=$1
                                 ;;
+        -t | --threads )		shift
+								threads=$1
+                                ;;
         -p | --print )          print=1
                                 ;;
         -h | --help )           usage
@@ -34,14 +37,18 @@ while [ "$1" != "" ]; do
     shift
 done
 
+if [[ "$threads" == "" ]]; then
+    threads=10
+fi
+
 input=$(basename $wordlist)
 
 if [[ $extensions == "" ]]; then
     outfile="gobuster-$input-$(echo $targ | sed 's/\//_/g' | sed 's/\:/_/g').txt"
-    cmd="gobuster dir -w $wordlist -u $targ -s $statuscodes -e -t 20 -l -o $outfile -a \"$UA\" -k --timeout 30s"
+    cmd="gobuster dir -w $wordlist -u $targ -s $statuscodes -e -t $threads -l -o $outfile -a \"$UA\" -k --timeout 30s"
 else
     outfile="gobuster-ext_$(echo $extensions | sed 's/,/_/g')-$input-$(echo $targ | sed 's/\//_/g' | sed 's/\:/_/g').txt"
-    cmd="gobuster dir -w $wordlist -u $targ -s $statuscodes -e -t 20 -l -o $outfile -a \"$UA\" -k --timeout 30s -x $extensions"
+    cmd="gobuster dir -w $wordlist -u $targ -s $statuscodes -e -t $threads -l -o $outfile -a \"$UA\" -k --timeout 30s -x $extensions"
 fi
 
 if [[ $print -eq 1 ]]; then
