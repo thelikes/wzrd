@@ -6,7 +6,7 @@ usage() {
 	echo "usage ./wzrd-gobuster.sh -u \$target -w \$wordlist -s \$res_codes -x \$extension"
 }
 
-UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36 (bugcrowd&h1)"
+UA="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.109 Safari/537.36"
 statuscodes="200,204,301,302,307,403,500,502"
 
 while [ "$1" != "" ]; do
