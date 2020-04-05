@@ -1,4 +1,7 @@
 #!/bin/bash
+# A script to execute getallurls on a URL and generate
+# a wordlist based on the output. 
+# https://github.com/lc/gau
 
 
 usage() {
