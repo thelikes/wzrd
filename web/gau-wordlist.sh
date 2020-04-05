@@ -39,8 +39,8 @@ fi
 echo $targ|getallurls|tee $gauout 
 
 # output wordlist
-cat $gauout |grep -Evi '\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.xls|\.css|\.eot|\.woff'|unfurl paths|sort -u |tee /tmp/paths
+cat $gauout |grep -Evi '\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.xls|\.css|\.eot|\.woff|\.svg|\.ttf|\.ppt|\.mp3|\.dot'|unfurl paths|sort -u |tee /tmp/paths
 
-{ cat /tmp/paths ; cat /tmp/paths | tok; } | sort -u | tee $wlout
+{ cat /tmp/paths ; cat /tmp/paths | tok; } | sed 's/^\///g' | sort -u | tee $wlout
 
 exit 0
