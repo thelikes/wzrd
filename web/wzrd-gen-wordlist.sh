@@ -104,10 +104,7 @@ if [[ $urls != "" ]] ; then
         fi
 fi
 
-{ if [ -f $domains_out ]; then cat $domains_out; fi; if [ -f $urls_out ]; then cat $urls_out; fi; } | sort -u > wordlist.txt
-
-# clean up
-rm $domains_out $urls_out
+{ if [ -f $domains_out ]; then cat $domains_out; rm $domains_out; fi; if [ -f $urls_out ]; then cat $urls_out; rm $urls_out; fi; } | sort -u > wordlist.txt
 
 echo "[*] Done. Outputfile is wordlist.txt ($(wc -l wordlist.txt|awk '{print $1}') lines)"
 
