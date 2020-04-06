@@ -5,7 +5,7 @@
 
 
 usage() {
-	echo "usage ./gau-wordlist.sh -t \$target -d \$out_dir -s"
+	echo "usage ./wzrd-gau-wordlist.sh -t \$target -d \$out_dir"
 }
 
 while [ "$1" != "" ]; do
@@ -42,6 +42,7 @@ fi
 echo $targ|getallurls|tee $gauout 
 
 # output wordlist
+# to-do: unfurl keys
 cat $gauout |grep -Evi '\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.xls|\.css|\.eot|\.woff|\.svg|\.ttf|\.ppt|\.mp3|\.dot'|unfurl paths|sort -u |tee /tmp/paths
 
 { cat /tmp/paths ; cat /tmp/paths | tok; } | sed 's/^\///g' | sort -u | tee $wlout
