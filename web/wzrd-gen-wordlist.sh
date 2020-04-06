@@ -30,6 +30,7 @@ done
 
 if [[ $domains == "" ]] && [[ $urls == "" ]] ; then
     usage
+    exit 1
 fi
 
 #
@@ -78,29 +79,29 @@ urls_out=wzrd_part-urls
 if [[ $urls != "" ]] ; then
     # to do: consider both upper and lower case list, or one list with both
     if [ -f $urls ] ; then
-    echo "[*] Manipulating URLs"
+        echo "[*] Manipulating URLs"
 
-    # paths
-    cat $urls |unfurl paths  > $paths_raw
-    { cat $paths_raw; cat $paths_raw | tok; } | grep -Evi '\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.xls|\.css|\.eot|\.woff|\.svg|\.ttf|\.ppt|\.mp3|\.dot' | sed 's/^\///g' | sort -u > $paths_out
+        # paths
+        cat $urls |unfurl paths  > $paths_raw
+        { cat $paths_raw; cat $paths_raw | tok; } | grep -Evi '\.png|\.jpg|\.jpeg|\.gif|\.pdf|\.doc|\.xls|\.css|\.eot|\.woff|\.svg|\.ttf|\.ppt|\.mp3|\.dot' | sed 's/^\///g' | sort -u > $paths_out
 
-    # keys
-    cat $urls | unfurl keys > $keys_raw
-    { cat $keys_raw; cat $keys_raw | tok; } | sort -u > $keys_out
-    # to-do: get-title
+        # keys
+        cat $urls | unfurl keys > $keys_raw
+        { cat $keys_raw; cat $keys_raw | tok; } | sort -u > $keys_out
+        # to-do: get-title
 
-    # combine
-    cat $paths_out $keys_out | sort -u > $urls_out
+        # combine
+        cat $paths_out $keys_out | sort -u > $urls_out
 
-    # clean up
-    rm $paths_raw
-    rm $keys_raw
-    rm $paths_out
-    rm $keys_out
+        # clean up
+        rm $paths_raw
+        rm $keys_raw
+        rm $paths_out
+        rm $keys_out
 
-    else
-        echo "[!] Error, file does not exist: $urls"
-    fi
+        else
+            echo "[!] Error, file does not exist: $urls"
+        fi
 fi
 
 { if [ -f $domains_out ]; then cat $domains_out; fi; if [ -f $urls_out ]; then cat $urls_out; fi; } | sort -u > wordlist.txt
