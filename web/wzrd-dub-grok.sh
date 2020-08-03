@@ -62,6 +62,10 @@ echo "[+] Running gau + creating wordlist"
 /opt/wzrd/web/wzrd-gau-wordlist.sh -t $targ 
 echo 
 
+# todo: run hakwraler
+# todo: js param mine
+# todo: try cat $targ | unfurl | tok | ffuf -u $targ/FUZZ -w -
+
 echo "[+] Running nmap --top-port 25"
 nmap -v -Pn -T4 --top-ports 25 $ip -oA nmap-top25-$ip
 echo
