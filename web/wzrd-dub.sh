@@ -55,7 +55,8 @@ echo $targ 2>&1 | unfurl domain | cero | tee cero-$(echo $targ | unfurl domain).
 echo
 
 echo "[+] Running webanalyze"
-webanalyze -silent -host $targ -apps ~/.apps.json -crawl 3 | tee webanalyze-$d.log
+rm /tmp/apps.json 2>/dev/null ; cd /tmp ; webanalyze -update ; cd -
+webanalyze -silent -host $targ -apps /tmp/.apps.json -crawl 3 | tee webanalyze-$d.log
 echo 
 
 echo "[+] Running gau + creating wordlist"
