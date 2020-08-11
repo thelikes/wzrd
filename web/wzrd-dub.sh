@@ -56,7 +56,7 @@ echo
 
 echo "[+] Running webanalyze"
 rm /tmp/apps.json 2>/dev/null ; cd /tmp ; webanalyze -update ; cd -
-webanalyze -silent -host $targ -apps /tmp/.apps.json -crawl 3 | tee webanalyze-$d.log
+webanalyze -silent -host $targ -apps /tmp/apps.json -crawl 3 | tee webanalyze-$d.log
 echo 
 
 echo "[+] Running gau + creating wordlist"
@@ -68,7 +68,7 @@ echo
 # todo: try cat $targ | unfurl | tok | ffuf -u $targ/FUZZ -w -
 
 echo "[+] Running nmap --top-port 25"
-nmap -v -Pn -T4 --top-ports 25 $ip -oA nmap-top25-$ip
+nmap -v -Pn -T4 --top-ports 25 -open $ip -oA nmap-top25-$ip
 echo
 
 echo "[+] Complete"

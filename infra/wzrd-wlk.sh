@@ -43,11 +43,11 @@ echo
 sleep 1
 
 printf $NORMAL
-nmap -vv -Pn --top-ports 1000 $targ -oN nmap-top1000-$targ.txt
+nmap -v -Pn --top-ports 1000 $targ -oA nmap-top1000-$targ
 
 # Quick scanning
-quick_tcp=nmap-tcp_quick-$targ.txt
-quick_udp=nmap-udp_quick-$targ.txt
+quick_tcp=nmap-tcp_quick-$targ
+quick_udp=nmap-udp_quick-$targ
 
 echo
 echo -e "${LBLUE}[+] Starting TCP scan..."
@@ -55,7 +55,7 @@ echo
 sleep 1
 
 printf $NORMAL
-nmap -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p- $targ -oN $quick_tcp
+nmap -v -Pn -sS --stats-every 3m --max-retries 1 --max-scan-delay 20 --defeat-rst-ratelimit -T4 -p- $targ -oA $quick_tcp
 
 echo
 echo -e "${LBLUE}[+] Starting UDP scan..."
@@ -63,17 +63,17 @@ echo
 sleep 1
 
 printf $NORMAL
-nmap -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 $targ -oN $quick_udp
+nmap -v -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 $targ -oA $quick_udp
 
-openports_tcp=ports-tcp-$targ.txt
-openports_udp=ports-udp-$targ.txt
+openports_tcp=ports-tcp-$targ
+openports_udp=ports-udp-$targ.
 
 # grep the full for open ports
 if grep open $quick_tcp | grep 'tcp' >/dev/null 2>&1; then
-    grep open $quick_tcp | grep 'tcp' |grep -v Discovered 2>&1 | cut -d\/ -f1 | tee $openports_tcp
+    grep open $quick_tcp | grep 'tcp' |grep -v Discovered 2>&1 | cut -d\/ -f1 | tee $openports_tcp.nmap
 fi
 if grep open $quick_udp | grep 'udp' >/dev/null 2>&1; then
-    grep open $quick_udp | grep 'udp' |grep -v Discovered 2>&1 | cut -d\/ -f1 | tee $openports_udp
+    grep open $quick_udp | grep 'udp' |grep -v Discovered 2>&1 | cut -d\/ -f1 | tee $openports_udp.nmap
 fi
 
 # build the port list for NMAP full
@@ -102,7 +102,7 @@ echo
 sleep 1
 
 # nmap
-nmapfull=nmap-full-$targ.txt
+nmapfull=nmap-full-$targ
 
 if [[ "$ports_list" == "" ]]
 then
@@ -117,14 +117,14 @@ sleep 1
 printf $NORMAL
 
 # run thorough nmap against identified ports
-nmap -vv --stats-every 3m -A --version-all  -Pn -p$ports_list $targ -oN $nmapfull
+nmap -v --stats-every 3m -A --version-all  -Pn -p$ports_list $targ -oA $nmapfull
 # add SYN and UDP flags to get UDP and TCP together
 #nmap -vv --stats-every 3m -sU -sS -A --version-all -Pn -p$ports_list $targ -oN $nmapfull
 
 # services
 services=services-$targ.txt
 
-grep open $nmapfull | grep 'tcp\|udp' |grep -v Discovered 2>&1 | tee $services
+grep open $nmapfull.nmap | grep 'tcp\|udp' |grep -v Discovered 2>&1 | tee $services
 
 echo
 echo -e "${GREEN}[+] Discovered services:"
