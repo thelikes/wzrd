@@ -66,6 +66,8 @@ echo
 # todo: run hakwraler
 # todo: js param mine
 # todo: try cat $targ | unfurl | tok | ffuf -u $targ/FUZZ -w -
+# todo: ipinfo
+# todo: handle multiple resolve IPs
 
 echo "[+] Running nmap --top-port 25"
 nmap -v -Pn -T4 --top-ports 25 -open $ip -oA nmap-top25-$ip
