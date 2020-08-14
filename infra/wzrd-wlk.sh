@@ -46,8 +46,8 @@ printf $NORMAL
 nmap -v -Pn --top-ports 1000 $targ -oA nmap-top1000-$targ
 
 # Quick scanning
-quick_tcp=nmap-tcp_quick-$targ
-quick_udp=nmap-udp_quick-$targ
+quick_tcp=nmap-tcp_quick-$targ.txt
+quick_udp=nmap-udp_quick-$targ.txt
 
 echo
 echo -e "${LBLUE}[+] Starting TCP scan..."
@@ -65,8 +65,8 @@ sleep 1
 printf $NORMAL
 nmap -v -Pn --top-ports 1000 -sU --stats-every 3m --max-retries 1 -T3 $targ -oA $quick_udp
 
-openports_tcp=ports-tcp-$targ
-openports_udp=ports-udp-$targ.
+openports_tcp=ports-tcp-$targ.txt
+openports_udp=ports-udp-$targ.txt
 
 # grep the full for open ports
 if grep open $quick_tcp | grep 'tcp' >/dev/null 2>&1; then
