@@ -25,6 +25,10 @@ fi
 
 out=httpx-$(echo $targ | sed 's/:\/\//./g'|sed 's/\/$//g').txt
 
-echo $targ | httpx -content-length -no-color  -silent -status-code -title -web-server -o $out -threads 20
+if [[ -f $targ ]]; then
+    httpx -l $targ -H "User-Agent: $UA" -no-color -o $out -threads 20 -ports 80,443,8080,8443 -title -content-length -status-code -web-server -silent
+else
+    echo $targ | httpx -H "User-Agent: $UA" -no-color -o $out -threads 20 -ports 80,443,8080,8443 -title -content-length -status-code -web-server -silent
+fi
 
 exit 0
