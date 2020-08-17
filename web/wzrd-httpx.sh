@@ -20,6 +20,7 @@ done
 
 if [[ "$targ" == "" ]] ; then 
     echo "[!] Error: No target provided"
+    usage
     exit 1
 fi
 
