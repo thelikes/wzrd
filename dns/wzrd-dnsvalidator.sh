@@ -22,6 +22,6 @@ if [[ "$outfile" == "" ]] ; then
     outfile=resolvers.txt
 fi
 
-dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 20 -o $outfile
+/usr/local/bin/dnsvalidator -tL https://public-dns.info/nameservers.txt -threads 20 -o $outfile
 
 exit 0
