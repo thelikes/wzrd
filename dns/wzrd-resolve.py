@@ -18,7 +18,7 @@ def resolveDomain(domain):
         ip_list += [line.split()[0]]
         
     # remove duplicate addresses
-    unique_ip_list = list(set(ip_list))
+    unique_ip_list = list(sorted(set(ip_list)))
     formatted_ip_list=''
 
     # format the list with commas
