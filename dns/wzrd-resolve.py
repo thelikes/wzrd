@@ -46,7 +46,7 @@ content = [x.strip() for x in content]
 # debug
 start_time = time.time()
 
-threads= 15
+threads= 20
 # Make the Pool of workers
 pool = ThreadPool(threads)
 # resolve IP(s)
