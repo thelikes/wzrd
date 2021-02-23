@@ -1,0 +1,6 @@
+1. http://www.securitysift.com/download/linuxprivchecker.py, or https://gist.github.com/sh1n0b1/e2e1a5f63fbec3706123
+2. https://github.com/rebootuser/LinEnum
+3. https://github.com/Arr0way/linux-local-enumeration-script
+4. https://github.com/InteliSecureLabs/Linux_Exploit_Suggester
+5. https://github.com/pentestmonkey/unix-privesc-check
+6. https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite/tree/master/linPEAS
