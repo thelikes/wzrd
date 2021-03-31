@@ -44,6 +44,10 @@ else
     d=$(echo $targ | unfurl domain)
 
     ip=$(dig +short $d)
+    if [ $(echo $ip|wc -l) -gt 1 ] ; then 
+        echo multiple
+        exit 1
+    fi
 fi
 
 
@@ -51,8 +55,12 @@ mkdir $ip-$d
 cd $ip-$d
 
 echo "[+] Running cero"
-echo $targ 2>&1 | unfurl domain | cero | tee cero-$(echo $targ | unfurl domain).log
+echo $ip 2>&1 | unfurl domain | cero | tee cero-$(echo $ip | unfurl domain).log
 echo
+
+echo "[+] Complete"
+
+exit 0
 
 echo "[+] Running webanalyze"
 rm /tmp/apps.json 2>/dev/null ; cd /tmp ; webanalyze -update ; cd -
@@ -73,6 +81,3 @@ echo "[+] Running nmap --top-port 25"
 nmap -v -Pn -T4 --top-ports 25 -open $ip -oA nmap-top25-$ip
 echo
 
-echo "[+] Complete"
-
-exit 0
