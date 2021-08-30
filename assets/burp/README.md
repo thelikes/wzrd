@@ -44,3 +44,16 @@
 * [foxyproxy](https://getfoxyproxy.org/)
 * [open-multiple-urls](https://github.com/htrinter/Open-Multiple-URLs)
 * [wappalyzer](https://www.wappalyzer.com/)
+
+## Earpmuffs
+
+No more noise in logs. [source](https://twitter.com/nomanramzan91/status/1419204383288463360)
+
+```
+# Burp Suite > Proxy > Options > TLS Pass Through > Add
+.*\.google\.com 
+.*\.gstatic\.com
+.*\.mozilla\.com
+.*\.googleapis\.com
+.*\.pki\.goog
+```
